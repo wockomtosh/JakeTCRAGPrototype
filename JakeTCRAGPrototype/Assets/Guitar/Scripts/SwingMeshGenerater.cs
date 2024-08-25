@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace JakeTCRAGPPrototype.Controller.Guiter
+namespace JakeTCRAGPPrototype.Controller.Guitar
 {
     public class SwingMeshGenerater : MonoBehaviour
     {
         [Header("SDK Settings & Debug")]
-        [SerializeField] Guiter_Controller GuiterCtrl;
+        [SerializeField] Guitar_Controller GuiterCtrl;
         [SerializeField] Transform Point1, Point2;
         [SerializeField] List<SwingLine> SwingLines;
         [SerializeField] float LifeTime = 1f;

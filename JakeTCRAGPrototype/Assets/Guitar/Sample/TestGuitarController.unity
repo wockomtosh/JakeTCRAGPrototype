@@ -387,6 +387,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Guiter_Ctrl: {fileID: 1196067236}
+  Edge1:
+    P1: {x: 0, y: 0, z: 0}
+    P2: {x: 0, y: 0, z: 0}
+    P1Index: 0
+    P2Index: 0
+    SpawnTime: 0
+  Edge2:
+    P1: {x: 0, y: 0, z: 0}
+    P2: {x: 0, y: 0, z: 0}
+    P1Index: 0
+    P2Index: 0
+    SpawnTime: 0
 --- !u!4 &502534638
 Transform:
   m_ObjectHideFlags: 0
@@ -572,7 +584,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2936698080663029208, guid: 56bc84fbe3b30ab4ea465252f70fb8a2, type: 3}
       propertyPath: m_Name
-      value: Guiter
+      value: Guitar
       objectReference: {fileID: 0}
     - target: {fileID: 6527276775379477589, guid: 56bc84fbe3b30ab4ea465252f70fb8a2, type: 3}
       propertyPath: m_LocalPosition.x

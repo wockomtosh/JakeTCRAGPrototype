@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 6527276775379477589}
   - component: {fileID: 8487175879359667187}
   m_Layer: 0
-  m_Name: Guiter
+  m_Name: Guitar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 3417844543082595302}
   - component: {fileID: 819716736871396542}
   m_Layer: 0
-  m_Name: GuiterMesh
+  m_Name: GuitarMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

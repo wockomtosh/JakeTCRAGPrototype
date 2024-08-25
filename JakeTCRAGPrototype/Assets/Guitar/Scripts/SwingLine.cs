@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace JakeTCRAGPPrototype.Controller.Guiter
+namespace JakeTCRAGPPrototype.Controller.Guitar
 {
     [System.Serializable]
     public class SwingLine

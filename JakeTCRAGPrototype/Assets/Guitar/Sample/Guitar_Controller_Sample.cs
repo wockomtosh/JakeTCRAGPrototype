@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace JakeTCRAGPPrototype.Controller.Guiter.Sample
+namespace JakeTCRAGPPrototype.Controller.Guitar.Sample
 {
-    public class Guiter_Controller_Sample : MonoBehaviour
+    public class Guitar_Controller_Sample : MonoBehaviour
     {
-        [SerializeField] Guiter_Controller Guiter_Ctrl;
+        [SerializeField] Guitar_Controller Guiter_Ctrl;
         [SerializeField] SwingLine Edge1;
         [SerializeField] SwingLine Edge2;
         void Update()

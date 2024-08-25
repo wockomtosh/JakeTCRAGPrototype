@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace JakeTCRAGPPrototype.Controller.Guiter {
-    public class Guiter_Controller : MonoBehaviour
+namespace JakeTCRAGPPrototype.Controller.Guitar {
+    public class Guitar_Controller : MonoBehaviour
     {
         [Header("Developer Setting")]
         [Tooltip("Change this to have a dynamic change of fadding speed, set the curve to a straight line of value 1 if a persist fadding is wanted")]
         [SerializeField] AnimationCurve FadeOutSpeedCurve;
-        [Tooltip("The reference of the parent space of Guiter")]
+        [Tooltip("The reference of the parent space of guitar")]
         [SerializeField] Transform HoldingTrans;
         [Tooltip("The range of swinging")]
         [SerializeField] [Range(1f, 360f)] float Range;
