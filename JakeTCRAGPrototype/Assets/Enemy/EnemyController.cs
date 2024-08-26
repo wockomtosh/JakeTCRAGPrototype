@@ -1,6 +1,15 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using UnityEngine;
+
+[Serializable]
+enum EnemyMovementAction
+{
+    DashToPlayer,
+    DashFromPlayer,
+    StayStill
+}
 
 [Serializable]
 struct EnemyBeat
@@ -8,12 +17,14 @@ struct EnemyBeat
     public Color beatColor;
     public bool attacking;
     public bool shielding;
+    public EnemyMovementAction movement;
 
-    public EnemyBeat(Color beatColor, bool attacking, bool shielding)
+    public EnemyBeat(Color beatColor, bool attacking, bool shielding, EnemyMovementAction movement)
     {
         this.beatColor = beatColor;
         this.attacking = attacking;
         this.shielding = shielding;
+        this.movement = movement;
     }
 }
 
@@ -36,13 +47,18 @@ public class EnemyController : MonoBehaviour
     private int curBeat = 0;
 
     [SerializeField]
-    private EnemyBeat beat1 = new EnemyBeat(Color.white, false, false);
+    private float beatMoveSpeed = 15;
     [SerializeField]
-    private EnemyBeat beat2 = new EnemyBeat(new Color(1, 0, 0, .3f), false, true);
+    private float beatMoveDuration = .1f;
+
     [SerializeField]
-    private EnemyBeat beat3 = new EnemyBeat(new Color(1, 0, 0, .6f), false, false);
+    private EnemyBeat beat1 = new EnemyBeat(Color.white, false, false, EnemyMovementAction.DashToPlayer);
     [SerializeField]
-    private EnemyBeat beat4 = new EnemyBeat(Color.red, true, true);
+    private EnemyBeat beat2 = new EnemyBeat(new Color(1, 0, 0, .3f), false, true, EnemyMovementAction.StayStill);
+    [SerializeField]
+    private EnemyBeat beat3 = new EnemyBeat(new Color(1, 0, 0, .6f), false, false, EnemyMovementAction.DashToPlayer);
+    [SerializeField]
+    private EnemyBeat beat4 = new EnemyBeat(Color.red, true, true, EnemyMovementAction.StayStill);
 
     private Vector3 attackPos = new Vector3(0, .9f, 0);
     private Vector3 restPos = Vector3.zero;
@@ -50,7 +66,7 @@ public class EnemyController : MonoBehaviour
     private bool attacking = false;
 
     [SerializeField]
-    private bool canMove = false;
+    private bool followPlayer = false;
     [SerializeField]
     private float followDistance = 10;
     [SerializeField]
@@ -88,7 +104,22 @@ public class EnemyController : MonoBehaviour
             beatTimer -= beatLength;
 
             IncrementBeat();
-            UpdateAttackZone();
+
+            switch (curBeat)
+            {
+                case 0:
+                    ApplyEnemyBeat(beat1);
+                    break;
+                case 1:
+                    ApplyEnemyBeat(beat2);
+                    break;
+                case 2:
+                    ApplyEnemyBeat(beat3);
+                    break;
+                case 3:
+                    ApplyEnemyBeat(beat4);
+                    break;
+            }
         }
     }
 
@@ -98,25 +129,6 @@ public class EnemyController : MonoBehaviour
         if (curBeat >= timeSignature)
         {
             curBeat = 0;
-        }
-    }
-
-    void UpdateAttackZone()
-    {
-        switch (curBeat)
-        {
-            case 0:
-                ApplyEnemyBeat(beat1);
-                break;
-            case 1:
-                ApplyEnemyBeat(beat2);
-                break;
-            case 2:
-                ApplyEnemyBeat(beat3);
-                break;
-            case 3:
-                ApplyEnemyBeat(beat4);
-                break;
         }
     }
 
@@ -137,6 +149,30 @@ public class EnemyController : MonoBehaviour
             attackZone.transform.position = transform.position + restPos;
             attackCollider.enabled = false;
         }
+
+        if (!hasKnockback)
+        {
+            if (beat.movement == EnemyMovementAction.DashToPlayer)
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                Vector3 toPlayerDirection = player.transform.position - transform.position;
+                enemyVelocity += toPlayerDirection.normalized * beatMoveSpeed;
+                StartCoroutine(BeatMoveTimer());
+            }
+            if (beat.movement == EnemyMovementAction.DashFromPlayer)
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                Vector3 toPlayerDirection = player.transform.position - transform.position;
+                enemyVelocity += -toPlayerDirection.normalized * beatMoveSpeed;
+                StartCoroutine(BeatMoveTimer());
+            }
+        }
+    }
+
+    IEnumerator BeatMoveTimer()
+    {
+        yield return new WaitForSeconds(beatMoveDuration);
+        enemyVelocity = Vector3.zero;
     }
 
     void UpdateMovement()
@@ -150,7 +186,7 @@ public class EnemyController : MonoBehaviour
         enemyVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(enemyVelocity * Time.deltaTime);
 
-        if (canMove)
+        if (followPlayer)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Vector3 toPlayerDirection = player.transform.position - transform.position;

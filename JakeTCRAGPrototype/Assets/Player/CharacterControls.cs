@@ -43,6 +43,8 @@ public class CharacterControls : MonoBehaviour
         attack1Action.Enable();
         dodgeAction = GetComponent<PlayerInput>().actions.FindAction("Dodge");
         dodgeAction.Enable();
+
+        GetComponent<Health>().canTakeDamage = true;
     }
 
     void Update()
