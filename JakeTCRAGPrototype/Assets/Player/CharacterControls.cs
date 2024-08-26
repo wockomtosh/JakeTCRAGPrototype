@@ -101,7 +101,12 @@ public class CharacterControls : MonoBehaviour
                     float endAngle = Vector3.Angle(endVector, enemyVector);
                     if (beginAngle <= attackAngle && endAngle <= attackAngle)
                     {
+                        //Apply damage and knockback
                         enemy.GetComponent<Health>().TakeDamage(1);
+
+                        //Apply knockback
+                        Vector3 knockbackDir = new Vector3(enemyVector.x, 0, enemyVector.z);
+                        enemy.GetComponent<EnemyController>().ApplyKnockback(knockbackDir.normalized, 10);
                     }
                 }
             }

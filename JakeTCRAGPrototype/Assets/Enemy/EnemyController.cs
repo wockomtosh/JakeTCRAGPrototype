@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -56,6 +57,10 @@ public class EnemyController : MonoBehaviour
     private float gravityValue = -9.81f;
     private Vector3 enemyVelocity;
     private bool groundedPlayer;
+
+    [SerializeField]
+    private float knockbackDuration = .2f;
+    private bool hasKnockback = false;
 
 
     void Start()
@@ -159,5 +164,26 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ApplyKnockback(Vector3 direction, float power)
+    {
+        if (hasKnockback)
+        {
+            return;
+        }
+        hasKnockback = true;
+        Debug.Log(direction);
+        Debug.Log(power);
+        enemyVelocity += direction * power;
+        Debug.Log(enemyVelocity);
+        StartCoroutine(KnockbackTimer());
+    }
+
+    IEnumerator KnockbackTimer()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        enemyVelocity = Vector3.zero;
+        hasKnockback = false;
     }
 }
