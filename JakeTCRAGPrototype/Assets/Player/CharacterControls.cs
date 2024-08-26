@@ -28,6 +28,10 @@ public class CharacterControls : MonoBehaviour
 
     private bool attacking = false;
 
+    [SerializeField]
+    private float knockbackDuration = .2f;
+    private bool hasKnockback = false;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -116,7 +120,7 @@ public class CharacterControls : MonoBehaviour
 
     void OnDodge(InputValue value)
     {
-        if (attacking)
+        if (attacking || hasKnockback)
         {
             return;
         }
@@ -138,5 +142,29 @@ public class CharacterControls : MonoBehaviour
     void OnAttack1(InputValue value)
     {
         guitarController.TriggerSwinging();
+    }
+
+    public void ApplyKnockback(Vector3 direction, float power)
+    {
+        if (hasKnockback)
+        {
+            return;
+        }
+        playerVelocity += direction * power;
+        hasKnockback = true;
+        moveAction.Disable();
+        attack1Action.Disable();
+        dodgeAction.Disable();
+        StartCoroutine(KnockbackTimer());
+    }
+
+    IEnumerator KnockbackTimer()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        playerVelocity = Vector3.zero;
+        hasKnockback = false;
+        moveAction.Enable();
+        attack1Action.Enable();
+        dodgeAction.Enable();
     }
 }

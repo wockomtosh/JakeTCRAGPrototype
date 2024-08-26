@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackZone: {fileID: 4792544365402953691}
+  attackCollider: {fileID: 262617391718141516}
   shield: {fileID: 6378965943689198743}
   bpm: 76
   beat1:
@@ -108,11 +109,11 @@ MonoBehaviour:
     attacking: 0
     shielding: 0
   beat2:
-    beatColor: {r: 1, g: 0, b: 0, a: 0.3}
-    attacking: 0
+    beatColor: {r: 1, g: 0, b: 0, a: 1}
+    attacking: 1
     shielding: 1
   beat3:
-    beatColor: {r: 1, g: 0, b: 0, a: 0.6}
+    beatColor: {r: 1, g: 1, b: 1, a: 1}
     attacking: 0
     shielding: 0
   beat4:
@@ -123,6 +124,7 @@ MonoBehaviour:
   followDistance: 10
   enemySpeed: 2
   gravityValue: -9.81
+  knockbackDuration: 0.2
 --- !u!143 &2425293827824722564
 CharacterController:
   m_ObjectHideFlags: 0
@@ -260,7 +262,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -876546973899608171, guid: d339b3b6159d93145b449931ed04f8dd, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -314,6 +316,7 @@ GameObject:
   - component: {fileID: 3920778757741353947}
   - component: {fileID: 3396871934813479951}
   - component: {fileID: 262617391718141516}
+  - component: {fileID: 1928028638721504105}
   m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Untagged
@@ -403,9 +406,22 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.99999994, y: 0.99999994, z: 0.05}
   m_Center: {x: -0.00000011920929, y: -0.00000023841858, z: 0}
+--- !u!114 &1928028638721504105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8030292326533925929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf30de3e2cff364bab0d3e5e2cd0325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1

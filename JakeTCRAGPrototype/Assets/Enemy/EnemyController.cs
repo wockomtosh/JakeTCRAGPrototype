@@ -21,6 +21,8 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField]
     GameObject attackZone;
+    [SerializeField] 
+    BoxCollider attackCollider;
     [SerializeField]
     GameObject shield;
     SpriteRenderer spriteRenderer;
@@ -127,11 +129,13 @@ public class EnemyController : MonoBehaviour
         {
             attacking = true;
             attackZone.transform.position = transform.position + attackPos;
+            attackCollider.enabled = true;
         }
         else
         {
             attacking = false;
             attackZone.transform.position = transform.position + restPos;
+            attackCollider.enabled = false;
         }
     }
 
@@ -173,10 +177,7 @@ public class EnemyController : MonoBehaviour
             return;
         }
         hasKnockback = true;
-        Debug.Log(direction);
-        Debug.Log(power);
         enemyVelocity += direction * power;
-        Debug.Log(enemyVelocity);
         StartCoroutine(KnockbackTimer());
     }
 

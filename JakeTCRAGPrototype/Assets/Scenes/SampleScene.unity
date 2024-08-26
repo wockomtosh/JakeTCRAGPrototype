@@ -122,6 +122,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &94436161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8030292326533925929, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+  m_PrefabInstance: {fileID: 4922670753882247890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &94436163 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 262617391718141516, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+  m_PrefabInstance: {fileID: 4922670753882247890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &94436165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94436161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf30de3e2cff364bab0d3e5e2cd0325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +676,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 262617391718141516, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 262617391718141516, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2188335776192304014, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -698,6 +728,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: attackCollider
+      value: 
+      objectReference: {fileID: 94436163}
+    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: beat2.attacking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: beat2.beatColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: beat3.beatColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: beat3.beatColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: beat3.beatColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: beat3.beatColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4038588573155235805, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -705,7 +763,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8030292326533925929, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 94436165}
   m_SourcePrefab: {fileID: 100100000, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
 --- !u!1001 &6264758052739260364
 PrefabInstance:
