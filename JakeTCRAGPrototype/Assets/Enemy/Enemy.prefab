@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3637633239196180791}
   - component: {fileID: 1335882176883727408}
   - component: {fileID: 9168657029046825652}
-  - component: {fileID: 4719771420150101146}
   - component: {fileID: 3773962549326460444}
   - component: {fileID: 2425293827824722564}
   m_Layer: 0
@@ -88,27 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4719771420150101146
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4038588573155235805}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3773962549326460444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +102,23 @@ MonoBehaviour:
   attackZone: {fileID: 4792544365402953691}
   shield: {fileID: 6378965943689198743}
   bpm: 76
+  beat1:
+    beatColor: {r: 1, g: 1, b: 1, a: 1}
+    attacking: 0
+    shielding: 0
+  beat2:
+    beatColor: {r: 1, g: 0, b: 0, a: 0.3}
+    attacking: 0
+    shielding: 1
+  beat3:
+    beatColor: {r: 1, g: 0, b: 0, a: 0.6}
+    attacking: 0
+    shielding: 0
+  beat4:
+    beatColor: {r: 1, g: 0, b: 0, a: 1}
+    attacking: 1
+    shielding: 1
+  canMove: 0
   followDistance: 10
   enemySpeed: 2
   gravityValue: -9.81

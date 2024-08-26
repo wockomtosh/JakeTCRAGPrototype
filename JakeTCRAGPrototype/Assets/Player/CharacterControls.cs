@@ -26,6 +26,8 @@ public class CharacterControls : MonoBehaviour
     private float dodgeLength = .15f;
     private bool dodgeProtection = false;
 
+    private bool attacking = false;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -41,11 +43,17 @@ public class CharacterControls : MonoBehaviour
 
     void Update()
     {
+        attacking = guitarController.GetIsSwinging;
         HandleMovement();
+        HandleAttack();
     }
 
     void HandleMovement()
     {
+        if (attacking)
+        {
+            return;
+        }
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -65,8 +73,48 @@ public class CharacterControls : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    void HandleAttack()
+    {
+        if (!attacking)
+        {
+            return;
+        }
+
+        //Filter nearby enemies
+        Collider[] enemies = Physics.OverlapSphere(transform.position, 5, LayerMask.GetMask("Enemy"));
+
+        foreach (Collider enemy in enemies)
+        {
+            Vector3 enemyVector = enemy.transform.position - transform.position;
+            float distToEnemy = enemyVector.magnitude;
+            guitarController.GetSwingRadious(out float attackRadius);
+
+            if (distToEnemy < attackRadius)
+            {
+                if(guitarController.GetSwingTrailEdges(out SwingLine beginLine, out SwingLine endLine))
+                {
+                    //using player position as start for now
+                    Vector3 beginVector = beginLine.P2 - transform.position;
+                    Vector3 endVector = endLine.P2 - transform.position;
+                    float attackAngle = Vector3.Angle(beginVector, endVector);
+                    float beginAngle = Vector3.Angle(beginVector, enemyVector);
+                    float endAngle = Vector3.Angle(endVector, enemyVector);
+                    if (beginAngle <= attackAngle && endAngle <= attackAngle)
+                    {
+                        enemy.GetComponent<Health>().TakeDamage(1);
+                    }
+                }
+            }
+            
+        }
+    }
+
     void OnDodge(InputValue value)
     {
+        if (attacking)
+        {
+            return;
+        }
         playerVelocity += gameObject.transform.forward * dodgeSpeed;
         dodgeProtection = true;
         transform.GetChild(0).gameObject.SetActive(true);
