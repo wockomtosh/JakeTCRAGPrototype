@@ -104,7 +104,7 @@ namespace JakeTCRAGPPrototype.Controller.Guitar {
         public bool GetSwingRadious(out float radius)
         {
             radius = 0f;
-            if (Point1 || Point2)
+            if (!Point1 || !Point2)
             {
                 return false;
             }
