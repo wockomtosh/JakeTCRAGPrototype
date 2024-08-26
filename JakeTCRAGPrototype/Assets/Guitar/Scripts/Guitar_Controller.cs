@@ -23,6 +23,7 @@ namespace JakeTCRAGPPrototype.Controller.Guitar {
         [SerializeField] bool IsSwinging = false;
         [SerializeField] Transform GuiterMeshTrans;
         [SerializeField] SwingMeshGenerater SwingMeshGntr;
+        [SerializeField] Transform Point1, Point2;
 
         [HideInInspector] public bool GetIsSwinging { get { return IsSwinging; } }
         [HideInInspector] public bool GetEffectFadeAwayAfterStopSwinging { get { return EffectFadeAwayAfterStopSwinging; } }
@@ -93,6 +94,21 @@ namespace JakeTCRAGPPrototype.Controller.Guitar {
 
             beginLine = new SwingLine(SwingMeshGntr.GetSwingLines[0].P1, SwingMeshGntr.GetSwingLines[0].P2, SwingMeshGntr.GetSwingLines[0].SpawnTime);
             endLine = new SwingLine(SwingMeshGntr.GetSwingLines[SwingMeshGntr.GetSwingLines.Count - 1].P1, SwingMeshGntr.GetSwingLines[SwingMeshGntr.GetSwingLines.Count - 1].P2, SwingMeshGntr.GetSwingLines[SwingMeshGntr.GetSwingLines.Count - 1].SpawnTime);
+            return true;
+        }
+
+        /// <summary>
+        /// Get the radius of the swing effect
+        /// </summary>
+        /// <returns>If the data is valid</returns>
+        public bool GetSwingRadious(out float radius)
+        {
+            radius = 0f;
+            if (Point1 || Point2)
+            {
+                return false;
+            }
+            radius = Vector3.Distance(Point1.position, Point2.position);
             return true;
         }
 
