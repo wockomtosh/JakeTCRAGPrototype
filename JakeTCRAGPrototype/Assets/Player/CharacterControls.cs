@@ -2,10 +2,12 @@ using System.Collections;
 using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using JakeTCRAGPPrototype.Controller.Guitar;
 
 public class CharacterControls : MonoBehaviour
 {
     CharacterController controller;
+    Guitar_Controller guitarController;
     InputAction moveAction;
     InputAction attack1Action;
     InputAction dodgeAction;
@@ -27,6 +29,7 @@ public class CharacterControls : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        guitarController = GetComponentInChildren<Guitar_Controller>();
 
         moveAction = GetComponent<PlayerInput>().actions.FindAction("Move");
         moveAction.Enable();
@@ -77,5 +80,10 @@ public class CharacterControls : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
         yield return new WaitForSeconds(dodgeLength / 2);
         playerVelocity = Vector3.zero;
+    }
+    
+    void OnAttack1(InputValue value)
+    {
+        guitarController.TriggerSwinging();
     }
 }

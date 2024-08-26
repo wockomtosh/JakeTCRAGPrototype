@@ -1,6 +1,20 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
+
+[Serializable]
+struct EnemyBeat
+{
+    public Color beatColor;
+    public bool attacking;
+    public bool shielding;
+
+    public EnemyBeat(Color beatColor, bool attacking, bool shielding)
+    {
+        this.beatColor = beatColor;
+        this.attacking = attacking;
+        this.shielding = shielding;
+    }
+}
 
 public class EnemyController : MonoBehaviour
 {
@@ -18,11 +32,19 @@ public class EnemyController : MonoBehaviour
     private int timeSignature = 4;
     private int curBeat = 0;
 
-    private Color beat1 = new Color(1, 0, 0, .3f);
-    private Color beat2 = new Color(1, 0, 0, .6f);
+    [SerializeField]
+    private EnemyBeat beat1 = new EnemyBeat(Color.white, false, false);
+    [SerializeField]
+    private EnemyBeat beat2 = new EnemyBeat(new Color(1, 0, 0, .3f), false, true);
+    [SerializeField]
+    private EnemyBeat beat3 = new EnemyBeat(new Color(1, 0, 0, .6f), false, false);
+    [SerializeField]
+    private EnemyBeat beat4 = new EnemyBeat(Color.red, true, true);
 
     private Vector3 attackPos = new Vector3(0, .9f, 0);
     private Vector3 restPos = Vector3.zero;
+
+    private bool attacking = false;
 
     [SerializeField]
     private bool canMove = false;
@@ -78,25 +100,33 @@ public class EnemyController : MonoBehaviour
         switch (curBeat)
         {
             case 0:
-                shield.SetActive(false);
-                spriteRenderer.color = Color.white;
-                attackZone.transform.position = transform.position + restPos;
+                ApplyEnemyBeat(beat1);
                 break;
             case 1:
-                shield.SetActive(true);
-                spriteRenderer.color = beat1;
-                attackZone.transform.position = transform.position + restPos;
+                ApplyEnemyBeat(beat2);
                 break;
             case 2:
-                shield.SetActive(false);
-                spriteRenderer.color = beat2;
-                attackZone.transform.position = transform.position + restPos;
+                ApplyEnemyBeat(beat3);
                 break;
             case 3:
-                shield.SetActive(true);
-                spriteRenderer.color = Color.red;
-                attackZone.transform.position = transform.position + attackPos;
+                ApplyEnemyBeat(beat4);
                 break;
+        }
+    }
+
+    void ApplyEnemyBeat(EnemyBeat beat) 
+    {
+        shield.SetActive(beat.shielding);
+        spriteRenderer.color = beat.beatColor;
+        if (beat.attacking)
+        {
+            attacking = true;
+            attackZone.transform.position = transform.position + attackPos;
+        }
+        else
+        {
+            attacking = false;
+            attackZone.transform.position = transform.position + restPos;
         }
     }
 
