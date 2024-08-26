@@ -122,26 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &495581597 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4038588573155235805, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-  m_PrefabInstance: {fileID: 4922670753882247890}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &495581604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495581597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97012ccdd7850cf44873acc115c3b547, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 1
-  maxhp: 0
-  iTime: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +654,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2188335776192304014, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: d339b3b6159d93145b449931ed04f8dd, type: 3}
     - target: {fileID: 3637633239196180791, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.79
@@ -714,25 +698,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: canMove
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4038588573155235805, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 4038588573155235805, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4038588573155235805, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 495581604}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
 --- !u!1001 &6264758052739260364
 PrefabInstance:
@@ -742,6 +715,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 755976336378535573, guid: 87db4e96c0d1a8642ac145e6facf64bd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: d339b3b6159d93145b449931ed04f8dd, type: 3}
     - target: {fileID: 4000892073871604076, guid: 87db4e96c0d1a8642ac145e6facf64bd, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
