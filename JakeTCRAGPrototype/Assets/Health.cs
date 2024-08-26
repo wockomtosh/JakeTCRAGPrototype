@@ -17,6 +17,9 @@ public class Health : MonoBehaviour
     [SerializeField]
     private Material damageMaterial;
 
+    [HideInInspector]
+    public bool canTakeDamage = true;
+
     void Start()
     {
         maxhp = hp;
@@ -32,7 +35,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (iTimer > iTime)
+        if (canTakeDamage && iTimer > iTime)
         {
             iTimer = 0f;
             Debug.Log($"{gameObject.name} took {damage} damage");

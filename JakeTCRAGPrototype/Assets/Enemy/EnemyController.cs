@@ -103,7 +103,6 @@ public class EnemyController : MonoBehaviour
 
     void UpdateAttackZone()
     {
-        //TODO: Find a way to abstract this out so that we can give designers the power to craft different patterns for each enemy
         switch (curBeat)
         {
             case 0:
@@ -124,6 +123,7 @@ public class EnemyController : MonoBehaviour
     void ApplyEnemyBeat(EnemyBeat beat) 
     {
         shield.SetActive(beat.shielding);
+        GetComponent<Health>().canTakeDamage = !beat.shielding;
         spriteRenderer.color = beat.beatColor;
         if (beat.attacking)
         {

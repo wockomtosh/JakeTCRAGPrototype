@@ -125,7 +125,7 @@ public class CharacterControls : MonoBehaviour
             return;
         }
         playerVelocity += gameObject.transform.forward * dodgeSpeed;
-        dodgeProtection = true;
+        GetComponent<Health>().canTakeDamage = false;
         transform.GetChild(0).gameObject.SetActive(true);
         StartCoroutine(DodgeTimer());
     }
@@ -133,7 +133,7 @@ public class CharacterControls : MonoBehaviour
     IEnumerator DodgeTimer()
     {
         yield return new WaitForSeconds(dodgeLength / 2);
-        dodgeProtection = false;
+        GetComponent<Health>().canTakeDamage = true;
         transform.GetChild(0).gameObject.SetActive(false);
         yield return new WaitForSeconds(dodgeLength / 2);
         playerVelocity = Vector3.zero;
