@@ -12,6 +12,11 @@ public class Health : MonoBehaviour
     private float iTime = 1f;
     private float iTimer = 2f;
 
+    [SerializeField]
+    private Material defaultMaterial;
+    [SerializeField]
+    private Material damageMaterial;
+
     void Start()
     {
         maxhp = hp;
@@ -32,17 +37,30 @@ public class Health : MonoBehaviour
             iTimer = 0f;
             Debug.Log($"{gameObject.name} took {damage} damage");
             hp -= damage;
+
+            //Insert die function
+
+            showDamage();
         }
-        
-        //if (hp <= 0)
-        //{
-        //    if (transform.parent != null)
-        //    {
-        //        Destroy(transform.parent.gameObject);
-        //    }
-        //    Destroy(gameObject);
-        //}
     }
 
+    private void showDamage()
+    {
+        setDamageMaterial();
+        Invoke(nameof(setRegularMaterial), .1f);
+        Invoke(nameof(setDamageMaterial), .2f);
+        Invoke(nameof(setRegularMaterial), .3f);
+    }
 
+    private void setDamageMaterial()
+    {
+        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer.material = damageMaterial;
+    }
+
+    private void setRegularMaterial()
+    {
+        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer.material = defaultMaterial;
+    }
 }
