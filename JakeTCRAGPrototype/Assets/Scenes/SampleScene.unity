@@ -122,28 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &94436161 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8030292326533925929, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-  m_PrefabInstance: {fileID: 4922670753882247890}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &94436163 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 262617391718141516, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-  m_PrefabInstance: {fileID: 4922670753882247890}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &94436165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94436161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaf30de3e2cff364bab0d3e5e2cd0325, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +328,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.21658355, y: 0, z: 0, w: 0.9762641}
-  m_LocalPosition: {x: 1.458218, y: 8.059999, z: -10.07107}
+  m_LocalPosition: {x: 1.458218, y: 8.059999, z: -19.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -668,6 +646,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!1 &1541805767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7695854360274475199, guid: 87db4e96c0d1a8642ac145e6facf64bd, type: 3}
+  m_PrefabInstance: {fileID: 6264758052739260364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1541805775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541805767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97012ccdd7850cf44873acc115c3b547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  maxhp: 0
+  iTime: 1
+  defaultMaterial: {fileID: -876546973899608171, guid: b7399495a2ac93b45beb2deedd0f9d48, type: 3}
+  damageMaterial: {fileID: -876546973899608171, guid: 8f66838cd5632904bbc415e304bbdfb8, type: 3}
+  canTakeDamage: 0
 --- !u!1001 &4922670753882247890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -676,18 +677,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 262617391718141516, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 262617391718141516, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2188335776192304014, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: d339b3b6159d93145b449931ed04f8dd, type: 3}
     - target: {fileID: 3637633239196180791, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.79
@@ -728,34 +717,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: attackCollider
-      value: 
-      objectReference: {fileID: 94436163}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: beat2.attacking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: beat2.beatColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: beat3.beatColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: beat3.beatColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: beat3.beatColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: beat3.beatColor.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4038588573155235805, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -763,10 +724,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8030292326533925929, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 94436165}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
 --- !u!1001 &6264758052739260364
 PrefabInstance:
@@ -802,7 +760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8813020533868164865, guid: 87db4e96c0d1a8642ac145e6facf64bd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.9289303
+      value: -4.71
       objectReference: {fileID: 0}
     - target: {fileID: 8813020533868164865, guid: 87db4e96c0d1a8642ac145e6facf64bd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -835,7 +793,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7695854360274475199, guid: 87db4e96c0d1a8642ac145e6facf64bd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1541805775}
   m_SourcePrefab: {fileID: 100100000, guid: 87db4e96c0d1a8642ac145e6facf64bd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
