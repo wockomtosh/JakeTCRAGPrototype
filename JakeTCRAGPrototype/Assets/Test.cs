@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TATK.VFX;
 
-public class Test : BasicVisualEffect
+public class Test : VisualEffectController
 {
 
     void Start()
