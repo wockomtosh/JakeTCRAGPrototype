@@ -104,23 +104,34 @@ MonoBehaviour:
   attackCollider: {fileID: 262617391718141516}
   shield: {fileID: 6378965943689198743}
   bpm: 76
+  beatMoveSpeed: 15
+  beatMoveDuration: 0.1
   beat1:
     beatColor: {r: 1, g: 1, b: 1, a: 1}
     attacking: 0
     shielding: 0
+    shooting: 0
+    movement: 0
   beat2:
     beatColor: {r: 1, g: 0, b: 0, a: 1}
     attacking: 1
     shielding: 1
+    shooting: 1
+    movement: 2
   beat3:
     beatColor: {r: 1, g: 1, b: 1, a: 1}
     attacking: 0
     shielding: 0
+    shooting: 0
+    movement: 0
   beat4:
     beatColor: {r: 1, g: 0, b: 0, a: 1}
     attacking: 1
     shielding: 1
-  canMove: 0
+    shooting: 1
+    movement: 2
+  projectilePrefab: {fileID: 6228555549503099696, guid: ee292a619855b594c9d4eda7cc4f5c38, type: 3}
+  followPlayer: 1
   followDistance: 10
   enemySpeed: 2
   gravityValue: -9.81
@@ -168,6 +179,7 @@ MonoBehaviour:
   iTime: 0.5
   defaultMaterial: {fileID: -876546973899608171, guid: b7399495a2ac93b45beb2deedd0f9d48, type: 3}
   damageMaterial: {fileID: -876546973899608171, guid: 8f66838cd5632904bbc415e304bbdfb8, type: 3}
+  canTakeDamage: 1
 --- !u!1 &4792544365402953691
 GameObject:
   m_ObjectHideFlags: 0

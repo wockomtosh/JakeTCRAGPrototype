@@ -717,18 +717,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: followPlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: beat1.movement
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
-      propertyPath: beat1.attacking
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4038588573155235805, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: m_Name
       value: Enemy
