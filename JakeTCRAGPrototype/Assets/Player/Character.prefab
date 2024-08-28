@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 8099633541507943239}
   - component: {fileID: 7878087318587512787}
   - component: {fileID: 7543502274066540728}
+  - component: {fileID: 5380769840271763834}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -418,6 +419,7 @@ MonoBehaviour:
   gravityValue: -9.81
   dodgeSpeed: 15
   dodgeLength: 0.2
+  knockbackDuration: 0.2
 --- !u!143 &7878087318587512787
 CharacterController:
   m_ObjectHideFlags: 0
@@ -486,6 +488,25 @@ MonoBehaviour:
   m_DefaultActionMap: Basic
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5380769840271763834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7695854360274475199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97012ccdd7850cf44873acc115c3b547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  maxhp: 0
+  iTime: 1
+  defaultMaterial: {fileID: -876546973899608171, guid: b7399495a2ac93b45beb2deedd0f9d48, type: 3}
+  damageMaterial: {fileID: -876546973899608171, guid: 8f66838cd5632904bbc415e304bbdfb8, type: 3}
+  canTakeDamage: 0
+  canDie: 0
 --- !u!1001 &1206146492105044159
 PrefabInstance:
   m_ObjectHideFlags: 0
