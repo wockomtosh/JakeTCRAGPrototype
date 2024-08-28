@@ -2,13 +2,15 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [Serializable]
 enum EnemyMovementAction
 {
     DashToPlayer,
     DashFromPlayer,
-    StayStill
+    StayStill,
+    StayAtRange
 }
 
 [Serializable]
@@ -40,7 +42,10 @@ public class EnemyController : MonoBehaviour
     GameObject shield;
     SpriteRenderer spriteRenderer;
     CharacterController controller;
+    [SerializeField]
+    private GameObject projectilePrefab;
 
+    [Header("Rhythm Props")]
     [SerializeField]
     private float bpm = 76;
     private float beatLength;
@@ -48,11 +53,20 @@ public class EnemyController : MonoBehaviour
     private int timeSignature = 4;
     private int curBeatNum = 0;
 
+    [Header("Dash Props")]
     [SerializeField]
     private float beatMoveSpeed = 15;
     [SerializeField]
     private float beatMoveDuration = .1f;
 
+    [SerializeField]
+    [Tooltip("When the enemy should try to get further")]
+    private float closeRadius = 10;
+    [SerializeField]
+    [Tooltip("When the enemy should try to get closer")]
+    private float farRadius = 20;
+
+    [Header("Beat Props")]
     [SerializeField]
     private EnemyBeat beat1 = new EnemyBeat(Color.white, false, false, false, EnemyMovementAction.DashToPlayer);
     [SerializeField]
@@ -67,9 +81,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 attackPos = new Vector3(0, .9f, 0);
     private Vector3 restPos = Vector3.zero;
 
-    [SerializeField]
-    private GameObject projectilePrefab;
-
+    [Header("General Movement Props")]
     [SerializeField]
     private bool followPlayer = false;
     [SerializeField]
@@ -157,7 +169,9 @@ public class EnemyController : MonoBehaviour
         }
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Vector3 toPlayerDirection = (player.transform.position - transform.position).normalized;
+        Vector3 toPlayerVector = player.transform.position - transform.position;
+        float toPlayerDistance = toPlayerVector.magnitude;
+        Vector3 toPlayerDirection = toPlayerVector.normalized;
 
         if (beat.shooting)
         {
@@ -169,12 +183,38 @@ public class EnemyController : MonoBehaviour
         {
             if (beat.movement == EnemyMovementAction.DashToPlayer)
             {
-                enemyVelocity += toPlayerDirection.normalized * beatMoveSpeed;
+                enemyVelocity += toPlayerDirection * beatMoveSpeed;
                 StartCoroutine(BeatMoveTimer());
             }
             if (beat.movement == EnemyMovementAction.DashFromPlayer)
             {
-                enemyVelocity += -toPlayerDirection.normalized * beatMoveSpeed;
+                enemyVelocity += -toPlayerDirection * beatMoveSpeed;
+                StartCoroutine(BeatMoveTimer());
+            }
+            if (beat.movement == EnemyMovementAction.StayAtRange)
+            {
+                if (toPlayerDistance < closeRadius)
+                {
+                    enemyVelocity += -toPlayerDirection * beatMoveSpeed;
+                }
+                else if (toPlayerDistance > farRadius)
+                {
+                    enemyVelocity += toPlayerDirection * beatMoveSpeed;
+                }
+                else
+                {
+                    int direction = Random.Range(0, 2);
+                    Debug.Log(direction);
+                    if (direction == 0)
+                    {
+                        enemyVelocity += -transform.right * beatMoveSpeed;
+                    }
+                    else 
+                    {
+                        enemyVelocity += transform.right * beatMoveSpeed;
+                    }
+                }
+
                 StartCoroutine(BeatMoveTimer());
             }
         }
