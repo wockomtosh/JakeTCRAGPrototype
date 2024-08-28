@@ -5,26 +5,28 @@ using UnityEngine.VFX;
 
 namespace TATK.VFX
 {
-    public class VisualEffectController : MonoBehaviour
+    public class VisualEffectController : TATKController
     {
         [SerializeField] VisualEffect VE;
 
-
-        private void OnEnable()
+        protected TATKResult Init()
         {
-            
+            TATKResult tmpResult;
+            tmpResult = TryFindComponent(out VE);
+            if (tmpResult != TATKResult.Success)
+            {
+                return tmpResult;
+            }
+            VE.Stop();
+            return TATKResult.Success;
         }
 
-        void Start()
+        protected TATKResult TryStartVisualEffect()
         {
-
+            VE.Play();  
+            Log("AAA");
+            return TATKResult.Success;
         }
-
-        void Update()
-        {
-
-        }
-
     }
 
 }
