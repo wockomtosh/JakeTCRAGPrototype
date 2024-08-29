@@ -12,7 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c93916e9ca2ab24ca45a729c659890b, type: 3}
   m_Name: DefaultHouseKeepingSetting
   m_EditorClassIdentifier: 
-  allDirectories: []
-  allowedDirectories: []
-  invalidDirectories: []
-  missingDirectories: []
+  ObjectNames:
+  - Enemy
+  - Guitar
+  - Player
+  - Sound
+  SpecialFolderNames: []
+  allDirectories:
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/DefaultURPSettings
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Enemy
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Materials
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Player
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Sound
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/TechArtToolkits
+  neededDirectories:
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/asdfasdf
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/asdf
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/df
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/fgaa
+  invalidDirectories:
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/DefaultURPSettings
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Enemy
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Materials
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Player
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Sound
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/TechArtToolkits
+  missingDirectories:
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/asdfasdf
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/asdf
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/df
+  - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/fgaa

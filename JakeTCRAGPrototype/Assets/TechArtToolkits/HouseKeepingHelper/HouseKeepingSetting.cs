@@ -8,7 +8,8 @@ using UnityEngine;
 
 public class HouseKeepingSetting : ScriptableObject
 {
-    List<string> ObjectFolderNames = new List<string>();
+    public List<string> ObjectNames = new List<string>();
+    public List<string> SpecialFolderNames = new List<string>();
 
 
 
@@ -42,20 +43,30 @@ public class HouseKeepingSetting : ScriptableObject
     }
 
     public List<string> allDirectories = new List<string>();
-    public List<string> allowedDirectories = new List<string>();
+    public List<string> neededDirectories = new List<string>();
     public List<string> invalidDirectories = new List<string>();
     public List<string> missingDirectories = new List<string>();
 
     public void OrganizeObjectFolders()
     {
-
-
         allDirectories = GetAllDirectoriesUnder().ToList();
 
-        #region Check Invalid Directories
-        for(int i = 0; i < allDirectories.Count; i++)
+        #region Get Needed Directories
+        for (int i = 0; i < ObjectNames.Count; i++)
         {
-            if (!IsValidDirectory(allowedDirectories.ToArray(), allDirectories[i]))
+            neededDirectories.Add(Application.dataPath + "/" + ObjectNames[i]);
+        }
+
+        for (int i = 0; i < SpecialFolderNames.Count; i++)
+        {
+            neededDirectories.Add(Application.dataPath + "/" + SpecialFolderNames[i]);
+        }
+        #endregion
+
+        #region Check Invalid Directories
+        for (int i = 0; i < allDirectories.Count; i++)
+        {
+            if (!IsValidDirectory(neededDirectories.ToArray(), allDirectories[i]))
             {
                 invalidDirectories.Add(allDirectories[i]);
             }
@@ -63,11 +74,11 @@ public class HouseKeepingSetting : ScriptableObject
         #endregion
 
         #region Check Missing Directories
-        for (int i = 0; i < ObjectFolderNames.Count; i++)
+        for (int i = 0; i < ObjectNames.Count; i++)
         {
-            if (!DirectoryExist(ObjectFolderNames[i]))
+            if (!DirectoryExist(ObjectNames[i]))
             {
-                missingDirectories.Add(Application.dataPath + "/" + ObjectFolderNames[i]);
+                missingDirectories.Add(Application.dataPath + "/" + ObjectNames[i]);
             }
         }
         #endregion
@@ -80,7 +91,12 @@ public class HouseKeepingSetting : ScriptableObject
 
     public string[] GetAllDirectoriesUnder(string folderName = "")
     {
-        return Directory.GetDirectories(Application.dataPath + "");
+        string[] tmp = Directory.GetDirectories(Application.dataPath + "");
+        for(int i = 0; i < tmp.Length; i++)
+        {
+            tmp[i] = SlashConvert(tmp[i]);
+        }
+        return tmp;
     }
     
     public bool IsValidDirectory(string[] allowedDirectories, string path = "")
@@ -94,5 +110,10 @@ public class HouseKeepingSetting : ScriptableObject
             }
         }
         return value;
+    }
+
+    public string SlashConvert(string input)
+    {
+        return input.Replace(@"\", "/");
     }
 }
