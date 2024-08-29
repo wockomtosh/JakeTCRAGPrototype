@@ -41,11 +41,14 @@ public class HouseKeepingSetting : ScriptableObject
         Selection.activeObject = asset;
     }
 
+    public List<string> allDirectories = new List<string>();
+    public List<string> allowedDirectories = new List<string>();
+    public List<string> invalidDirectories = new List<string>();
+    public List<string> missingDirectories = new List<string>();
+
     public void OrganizeObjectFolders()
     {
-        List<string> allDirectories = new List<string>();
-        List<string> allowedDirectories = new List<string>();
-        List<string> invalidDirectories = new List<string>();
+
 
         allDirectories = GetAllDirectoriesUnder().ToList();
 
@@ -64,11 +67,10 @@ public class HouseKeepingSetting : ScriptableObject
         {
             if (!DirectoryExist(ObjectFolderNames[i]))
             {
-
+                missingDirectories.Add(Application.dataPath + "/" + ObjectFolderNames[i]);
             }
         }
         #endregion
-
     }
 
     public bool DirectoryExist(string path = "")
