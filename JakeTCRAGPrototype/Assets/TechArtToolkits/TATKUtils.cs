@@ -4,10 +4,6 @@ using UnityEngine;
 
 namespace TATK.Utils
 {
-    public static class ComponentExt
-    {
-       
-    }
 }
 
 

@@ -21,13 +21,12 @@ namespace TATK.VFX
             return TATKResult.Success;
         }
 
-        protected TATKResult TryStartVisualEffect()
+        protected TATKResult TryStartVisualEffect(string eventName = "OnPlay")
         {
-            VE.Play();  
-            Log("AAA");
+            VE.Play();
+            VE.SendEvent(eventName);
             return TATKResult.Success;
         }
     }
-
 }
 
