@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343dc861d518aa645a4c1d6350f23fca, type: 3}
+  m_Name: FolderSetting_Textures
+  m_EditorClassIdentifier: Assembly-CSharp::HouseKeepingSetting/FolderSetting
+  FolderName: Textures
+  Required: 0
+  RequireHouseKeepingSetting: 0
+  RegisteredFileSettings:
+  - FileSubName: png
+    Convention: T_AO_Name
+    Required: 0
+  - FileSubName: png
+    Convention: T_BaseColor_Name
+    Required: 0
+  - FileSubName: png
+    Convention: T_Normal_Name
+    Required: 0

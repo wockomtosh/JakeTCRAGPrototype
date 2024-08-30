@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c93916e9ca2ab24ca45a729c659890b, type: 3}
-  m_Name: DefaultHouseKeepingSetting
+  m_Name: AssetsHouseKeepingSetting
   m_EditorClassIdentifier: 
-  ObjectNames:
+  ObjectFolders:
   - Enemy
   - Guitar
   - Player
   - Sound
-  SpecialFolderNames: []
+  SpecialFolders: []
   allDirectories:
   - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/DefaultURPSettings
   - D:/Vincent/Work/GameProject/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Enemy

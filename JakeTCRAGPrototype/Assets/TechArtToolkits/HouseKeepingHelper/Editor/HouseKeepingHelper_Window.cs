@@ -13,12 +13,12 @@ class HouseKeepingHelper_Window : EditorWindow
         Setting = (HouseKeepingSetting)EditorGUILayout.ObjectField(Setting, typeof(HouseKeepingSetting));
 
         
-        EditorGUILayout.Popup(0, Setting.ObjectNames.ToArray());
+        //EditorGUILayout.Popup(0, Setting.RegisteredFolders.ToArray());
+        //EditorGUILayout.LabelField("Object Settings");
 
-        EditorGUILayout.LabelField("Object Settings");
         if (GUILayout.Button("HouseKeeping"))
         {
-            Setting.OrganizeObjectFolders();
+            Setting.HouseKeeping();
         }
     }
 

@@ -8,28 +8,10 @@ using UnityEngine;
 
 public class HouseKeepingSetting : ScriptableObject
 {
-    public List<string> ObjectNames = new List<string>();
-    public List<string> SpecialFolderNames = new List<string>();
+    public List<FolderSetting> RegisteredFolders = new List<FolderSetting>();
+    public string Location { get { return GetFileLocation(); } }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    [MenuItem("Assets/Create/TATK/HouseKeepingSetting")]
+    [MenuItem("Assets/Create/TATK/HouseKeepingHelper/HouseKeepingSetting")]
     public static void CreateMyAsset()
     {
         HouseKeepingSetting asset = ScriptableObject.CreateInstance<HouseKeepingSetting>();
@@ -47,19 +29,15 @@ public class HouseKeepingSetting : ScriptableObject
     public List<string> invalidDirectories = new List<string>();
     public List<string> missingDirectories = new List<string>();
 
-    public void OrganizeObjectFolders()
+    public void HouseKeeping()
     {
-        allDirectories = GetAllDirectoriesUnder().ToList();
+        Debug.Log("Location: " + Location);
+        allDirectories = GetAllDirectoriesUnder(Location).ToList();
 
         #region Get Needed Directories
-        for (int i = 0; i < ObjectNames.Count; i++)
+        for (int i = 0; i < RegisteredFolders.Count; i++)
         {
-            neededDirectories.Add(Application.dataPath + "/" + ObjectNames[i]);
-        }
-
-        for (int i = 0; i < SpecialFolderNames.Count; i++)
-        {
-            neededDirectories.Add(Application.dataPath + "/" + SpecialFolderNames[i]);
+            neededDirectories.Add(Location + RegisteredFolders[i].FolderName);
         }
         #endregion
 
@@ -74,11 +52,11 @@ public class HouseKeepingSetting : ScriptableObject
         #endregion
 
         #region Check Missing Directories
-        for (int i = 0; i < ObjectNames.Count; i++)
+        for (int i = 0; i < RegisteredFolders.Count; i++)
         {
-            if (!DirectoryExist(ObjectNames[i]))
+            if (!DirectoryExist(RegisteredFolders[i].FolderName))
             {
-                missingDirectories.Add(Application.dataPath + "/" + ObjectNames[i]);
+                missingDirectories.Add(Location + RegisteredFolders[i]);
             }
         }
         #endregion
@@ -89,9 +67,9 @@ public class HouseKeepingSetting : ScriptableObject
         return Directory.Exists(Application.dataPath + "/" + path);
     }
 
-    public string[] GetAllDirectoriesUnder(string folderName = "")
+    public string[] GetAllDirectoriesUnder(string path)
     {
-        string[] tmp = Directory.GetDirectories(Application.dataPath + "");
+        string[] tmp = Directory.GetDirectories(path);
         for(int i = 0; i < tmp.Length; i++)
         {
             tmp[i] = SlashConvert(tmp[i]);
@@ -110,6 +88,14 @@ public class HouseKeepingSetting : ScriptableObject
             }
         }
         return value;
+    }
+
+    public string GetFileLocation()
+    {
+        string location = "";
+        location = Application.dataPath + AssetDatabase.GetAssetPath(this).Substring(6);
+        location = location.Substring(0, location.LastIndexOf("/") + 1);
+        return location;
     }
 
     public string SlashConvert(string input)
