@@ -20,6 +20,9 @@ public class Health : MonoBehaviour
     [HideInInspector]
     public bool canTakeDamage = true;
 
+    [SerializeField]
+    private bool canDie = true;
+
     void Start()
     {
         maxhp = hp;
@@ -42,6 +45,10 @@ public class Health : MonoBehaviour
             hp -= damage;
 
             //Insert die function
+            if (canDie && hp < 0)
+            {
+                Destroy(gameObject);
+            }
 
             showDamage();
         }

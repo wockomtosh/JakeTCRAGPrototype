@@ -124,6 +124,39 @@
                 },
                 {
                     "name": "",
+                    "id": "a342b676-0b92-40f2-92b2-0ff94f30eec4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f0dfc45-c16a-48d4-b178-232e5a29aa39",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e5b5f9b-2c4b-47d7-ad71-999651bbfd1c",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ea5ca7a9-655d-4099-9c67-20a699d0f25b",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
@@ -137,6 +170,17 @@
                     "name": "",
                     "id": "19c4e6c0-421c-40da-a9f8-6afc24c63c68",
                     "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c45c9007-5350-47e1-912e-157804c97611",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
