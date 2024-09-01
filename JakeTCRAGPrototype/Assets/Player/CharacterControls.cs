@@ -143,7 +143,10 @@ public class CharacterControls : MonoBehaviour
     
     void OnAttack1(InputValue value)
     {
-        guitarController.TriggerSwinging();
+        if (guitarController.TriggerSwinging())
+        {
+            MusicManager.GetInstance().IncreaseGuitar();
+        }
     }
 
     public void ApplyKnockback(Vector3 direction, float power)
