@@ -3,9 +3,19 @@ using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using JakeTCRAGPPrototype.Controller.Guitar;
+using System.Collections.Generic;
+
+public enum PowerUp
+{
+    None,
+    Strength,
+    Speed
+}
 
 public class CharacterControls : MonoBehaviour
 {
+    static CharacterControls instance;
+
     CharacterController controller;
     Guitar_Controller guitarController;
     InputAction moveAction;
@@ -18,6 +28,9 @@ public class CharacterControls : MonoBehaviour
     [SerializeField]
     private float playerSpeed = 5.0f;
     [SerializeField]
+    private float powerSpeed = 10f;
+    private float curSpeed = 5.0f;
+    [SerializeField]
     private float gravityValue = -9.81f;
 
     [SerializeField]
@@ -26,14 +39,32 @@ public class CharacterControls : MonoBehaviour
     private float dodgeLength = .15f;
     private bool dodgeProtection = false;
 
+    [SerializeField]
+    private float playerStrength = 1f;
+    [SerializeField]
+    private float powerStrength = 2f;
+    private float curStrength = 1f;
+
     private bool attacking = false;
 
     [SerializeField]
     private float knockbackDuration = .2f;
     private bool hasKnockback = false;
 
+    [SerializeField]
+    private Material defaultMaterial;
+    [SerializeField]
+    private Material speedMaterial;
+    [SerializeField]
+    private Material strengthMaterial;
+
     void Start()
     {
+        instance = this;
+
+        curSpeed = playerSpeed;
+        curStrength = playerStrength;
+
         controller = GetComponent<CharacterController>();
         guitarController = GetComponentInChildren<Guitar_Controller>();
 
@@ -68,7 +99,7 @@ public class CharacterControls : MonoBehaviour
 
         Vector2 inputDirection = moveAction.ReadValue<Vector2>();
         Vector3 move = new Vector3(inputDirection.x, 0, inputDirection.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        controller.Move(move * Time.deltaTime * curSpeed);
 
         if (move != Vector3.zero)
         {
@@ -149,6 +180,14 @@ public class CharacterControls : MonoBehaviour
         }
     }
 
+    void OnAttack2(InputValue value)
+    {
+        if (guitarController.TriggerSwinging())
+        {
+            MusicManager.GetInstance().IncreaseKeyboard();
+        }
+    }
+
     public void ApplyKnockback(Vector3 direction, float power)
     {
         if (hasKnockback)
@@ -171,5 +210,58 @@ public class CharacterControls : MonoBehaviour
         moveAction.Enable();
         attack1Action.Enable();
         dodgeAction.Enable();
+    }
+
+    public void SetPowerUp(PowerUp powerUp)
+    {
+        switch (powerUp)
+        {
+            case PowerUp.Speed:
+                setSpeedMaterial();
+                curSpeed = powerSpeed;
+                break;
+            case PowerUp.Strength:
+                setStrengthMaterial();
+                curStrength = powerStrength;
+                break;
+        }
+    }
+
+    public void RemovePowerUp(PowerUp powerUp)
+    {
+        switch (powerUp)
+        {
+            case PowerUp.Speed:
+                setDefaultMaterial();
+                curSpeed = playerSpeed;
+                break;
+            case PowerUp.Strength:
+                setDefaultMaterial();
+                curStrength = playerStrength;
+                break;
+        }
+    }
+
+    public void setSpeedMaterial()
+    {
+        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer.material = speedMaterial;
+    }
+
+    public void setStrengthMaterial()
+    {
+        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer.material = strengthMaterial;
+    }
+
+    public void setDefaultMaterial()
+    {
+        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        meshRenderer.material = defaultMaterial;
+    }
+
+    public static CharacterControls GetInstance()
+    {
+        return instance;
     }
 }
