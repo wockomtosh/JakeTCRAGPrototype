@@ -31,6 +31,11 @@ public class HouseKeepingSetting : ScriptableObject
 
     public void HouseKeeping()
     {
+        allDirectories.Clear();
+        neededDirectories.Clear();  
+        missingDirectories.Clear(); 
+        invalidDirectories.Clear();
+
         Debug.Log("Location: " + Location);
         allDirectories = GetAllDirectoriesUnder(Location).ToList();
 
@@ -54,9 +59,9 @@ public class HouseKeepingSetting : ScriptableObject
         #region Check Missing Directories
         for (int i = 0; i < RegisteredFolders.Count; i++)
         {
-            if (!DirectoryExist(RegisteredFolders[i].FolderName))
+            if (!DirectoryExist(Location + RegisteredFolders[i].FolderName))
             {
-                missingDirectories.Add(Location + RegisteredFolders[i]);
+                missingDirectories.Add(Location + RegisteredFolders[i].FolderName);
             }
         }
         #endregion
@@ -64,7 +69,7 @@ public class HouseKeepingSetting : ScriptableObject
 
     public bool DirectoryExist(string path = "")
     {
-        return Directory.Exists(Application.dataPath + "/" + path);
+        return Directory.Exists(path);
     }
 
     public string[] GetAllDirectoriesUnder(string path)

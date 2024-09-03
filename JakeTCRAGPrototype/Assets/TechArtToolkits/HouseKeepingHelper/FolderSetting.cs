@@ -19,6 +19,12 @@ public class FolderSetting : ScriptableObject
         EditorUtility.FocusProjectWindow();
         Selection.activeObject = asset;
     }
+
+    public void CleanFolder(ref HouseKeepingSetting currentHouseKeeping)
+    {
+        string currentPath = currentHouseKeeping.Location + FolderName;
+
+    }
 }
 
 [System.Serializable]
