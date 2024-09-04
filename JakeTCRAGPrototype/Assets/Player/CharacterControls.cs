@@ -46,6 +46,11 @@ public class CharacterControls : MonoBehaviour
     private float powerStrength = 2f;
     private float curStrength = 1f;
 
+    [SerializeField]
+    private float baseGuitarLength = .5f;
+    [SerializeField]
+    private float powerGuitarLength = .8f;
+
     private bool attacking = false;
 
     [SerializeField]
@@ -224,6 +229,7 @@ public class CharacterControls : MonoBehaviour
             case PowerUp.Strength:
                 setStrengthMaterial();
                 curStrength = powerStrength;
+                GameObject.Find("Point2").transform.localPosition = new Vector3(0, powerGuitarLength, 0);
                 break;
         }
     }
@@ -239,6 +245,7 @@ public class CharacterControls : MonoBehaviour
             case PowerUp.Strength:
                 setDefaultMaterial();
                 curStrength = playerStrength;
+                GameObject.Find("Point2").transform.localPosition = new Vector3(0, baseGuitarLength, 0);
                 break;
         }
     }
