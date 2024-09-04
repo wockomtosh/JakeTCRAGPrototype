@@ -273,4 +273,12 @@ public class EnemyController : MonoBehaviour
         enemyVelocity = Vector3.zero;
         hasKnockback = false;
     }
+
+    public void ResetBeat()
+    {
+        curBeat = beat1;
+        curBeatNum = 0;
+        beatTimer = 0;
+        beatLength = 60 / bpm;
+    }
 }

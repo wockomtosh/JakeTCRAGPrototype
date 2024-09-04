@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using JakeTCRAGPPrototype.Controller.Guitar;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public enum PowerUp
 {
@@ -44,6 +45,11 @@ public class CharacterControls : MonoBehaviour
     [SerializeField]
     private float powerStrength = 2f;
     private float curStrength = 1f;
+
+    [SerializeField]
+    private float baseGuitarLength = .5f;
+    [SerializeField]
+    private float powerGuitarLength = .8f;
 
     private bool attacking = false;
 

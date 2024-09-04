@@ -65,6 +65,11 @@ public class MusicManager : MonoBehaviour
         keyboard.lead.volume = .5f;
         keyboard.lead.mute = true;
         keyboard.timer = leadCooldownTime;
+
+        foreach( EnemyController enemy in GameObject.FindObjectsOfType<EnemyController>())
+        {
+            enemy.ResetBeat();
+        }
     }
 
     //TODO: Have some sort of fade-in/out for the tracks rather than just mute/unmute?
