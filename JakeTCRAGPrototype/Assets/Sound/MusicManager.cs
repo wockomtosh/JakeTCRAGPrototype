@@ -87,17 +87,13 @@ public class MusicManager : MonoBehaviour
             track.rhythm.volume -= Time.deltaTime / rhythmCooldownFactor;
         }
 
-        if (track.lead.mute == false)
+        if (track.rhythm.volume <= .5f)
         {
-            track.timer -= Time.deltaTime;
-            track.slider.value = track.timer / leadCooldownTime;
-            if (track.timer <= 0)
-            {
-                track.timer = leadCooldownTime;
-                track.lead.mute = true;
-                CharacterControls.GetInstance().RemovePowerUp(track.powerUp);
-            }
+            track.lead.mute = true;
+            CharacterControls.GetInstance().RemovePowerUp(track.powerUp);
         }
+
+        track.slider.value = (track.rhythm.volume - .5f) * 2;
     }
 
     public void IncreaseGuitar()
