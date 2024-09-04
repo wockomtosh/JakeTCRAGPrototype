@@ -379,7 +379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: bpm
-      value: 60
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: farRadius
@@ -601,7 +601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: bpm
-      value: 60
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: beatMoveSpeed
