@@ -306,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: beat1.movement
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: beat2.movement
@@ -314,7 +314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: beat3.movement
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3773962549326460444, guid: a54300db37f681c4abc8fb19b9f33ccb, type: 3}
       propertyPath: beat4.movement
@@ -1351,7 +1351,7 @@ PrefabInstance:
       objectReference: {fileID: -876546973899608171, guid: d339b3b6159d93145b449931ed04f8dd, type: 3}
     - target: {fileID: 4000892073871604076, guid: 87db4e96c0d1a8642ac145e6facf64bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5283414606713857247, guid: 87db4e96c0d1a8642ac145e6facf64bd, type: 3}
       propertyPath: m_IsActive

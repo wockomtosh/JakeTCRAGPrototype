@@ -12,6 +12,7 @@ public struct AdjustableTrack
     [HideInInspector] public float timer; //used to track how long the lead has been playing
     public Slider slider;
     public PowerUp powerUp;
+    public float increaseAmount;
 }
 
 public class MusicManager : MonoBehaviour
@@ -106,7 +107,7 @@ public class MusicManager : MonoBehaviour
 
     void IncreaseTrack(ref AdjustableTrack track)
     {
-        track.rhythm.volume += .1f;
+        track.rhythm.volume += track.increaseAmount;
         if (track.rhythm.volume >= 1)
         {
             //TODO: Set the volume here to the base and don't let it increment??
