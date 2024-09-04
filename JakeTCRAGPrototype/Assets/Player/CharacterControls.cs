@@ -46,11 +46,6 @@ public class CharacterControls : MonoBehaviour
     private float powerStrength = 2f;
     private float curStrength = 1f;
 
-    [SerializeField]
-    private float baseGuitarLength = .5f;
-    [SerializeField]
-    private float powerGuitarLength = .8f;
-
     private bool attacking = false;
 
     [SerializeField]
