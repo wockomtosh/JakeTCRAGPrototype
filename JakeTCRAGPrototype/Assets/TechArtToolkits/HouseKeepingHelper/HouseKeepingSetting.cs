@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class HouseKeepingSetting : ScriptableObject
 {
+    public string ObjectName;
     public List<FolderSetting> RegisteredFolders = new List<FolderSetting>();
     public string Location { get { return GetFileLocation(); } }
 
@@ -27,6 +26,7 @@ public class HouseKeepingSetting : ScriptableObject
     public List<string> allDirectories = new List<string>();
     public List<string> neededDirectories = new List<string>();
     public List<string> invalidDirectories = new List<string>();
+    public List<string> validDirectories = new List<string>();
     public List<string> missingDirectories = new List<string>();
 
     public void HouseKeeping()
@@ -35,9 +35,10 @@ public class HouseKeepingSetting : ScriptableObject
         neededDirectories.Clear();  
         missingDirectories.Clear(); 
         invalidDirectories.Clear();
+        validDirectories.Clear();
 
         Debug.Log("Location: " + Location);
-        allDirectories = GetAllDirectoriesUnder(Location).ToList();
+        allDirectories = FIO_Utils.GetAllDirectoriesUnder(Location).ToList();
 
         #region Get Needed Directories
         for (int i = 0; i < RegisteredFolders.Count; i++)
@@ -45,66 +46,45 @@ public class HouseKeepingSetting : ScriptableObject
             neededDirectories.Add(Location + RegisteredFolders[i].FolderName);
         }
         #endregion
-
-        #region Check Invalid Directories
         for (int i = 0; i < allDirectories.Count; i++)
         {
-            if (!IsValidDirectory(neededDirectories.ToArray(), allDirectories[i]))
+            #region Check Invalid Directories
+            if (!FIO_Utils.IsValidDirectory(neededDirectories.ToArray(), allDirectories[i]))
             {
                 invalidDirectories.Add(allDirectories[i]);
             }
+            #endregion
+            #region Check Valid Directories
+            else
+            {
+                validDirectories.Add(allDirectories[i]);
+            }
+            #endregion
         }
-        #endregion
 
         #region Check Missing Directories
         for (int i = 0; i < RegisteredFolders.Count; i++)
         {
-            if (!DirectoryExist(Location + RegisteredFolders[i].FolderName))
+            if (!FIO_Utils.DirectoryExist(Location + RegisteredFolders[i].FolderName))
             {
                 missingDirectories.Add(Location + RegisteredFolders[i].FolderName);
             }
         }
         #endregion
-    }
 
-    public bool DirectoryExist(string path = "")
-    {
-        return Directory.Exists(path);
-    }
-
-    public string[] GetAllDirectoriesUnder(string path)
-    {
-        string[] tmp = Directory.GetDirectories(path);
-        for(int i = 0; i < tmp.Length; i++)
+        foreach(FolderSetting folderSetting in RegisteredFolders)
         {
-            tmp[i] = SlashConvert(tmp[i]);
+            folderSetting.OrganizeFolder(this);
         }
-        return tmp;
-    }
-    
-    public bool IsValidDirectory(string[] allowedDirectories, string path = "")
-    {
-        bool value = false;
-        for(int i = 0; i < allowedDirectories.Length; i++)
-        {
-            if (allowedDirectories[i] == path)
-            {
-                value = true;
-            }
-        }
-        return value;
     }
 
-    public string GetFileLocation()
+   
+
+    string GetFileLocation()
     {
         string location = "";
         location = Application.dataPath + AssetDatabase.GetAssetPath(this).Substring(6);
         location = location.Substring(0, location.LastIndexOf("/") + 1);
         return location;
-    }
-
-    public string SlashConvert(string input)
-    {
-        return input.Replace(@"\", "/");
     }
 }

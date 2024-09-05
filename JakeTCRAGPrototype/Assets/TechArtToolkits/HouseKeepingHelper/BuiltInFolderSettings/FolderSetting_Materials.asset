@@ -25,3 +25,7 @@ MonoBehaviour:
   - Convention: SH_Name
     FileSubName: shadergraph
     Required: 0
+  invalidFiles:
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Materials/M_Guitar.mat
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Materials/M_SwingMesh.mat
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Materials/SH_SwingMesh.shadergraph

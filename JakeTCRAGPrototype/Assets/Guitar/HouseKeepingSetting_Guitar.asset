@@ -13,11 +13,24 @@ MonoBehaviour:
   m_Name: HouseKeepingSetting_Guitar
   m_EditorClassIdentifier: 
   RegisteredFolders:
-  - {fileID: 11400000, guid: 8470c5f9b85bbe147878426fec7519f8, type: 2}
   - {fileID: 11400000, guid: 598c8925a99db084ba9a35d1e8ebc8d0, type: 2}
-  - {fileID: 11400000, guid: e687a70b615dcc746a0aa42a40c7cd42, type: 2}
+  - {fileID: 11400000, guid: 8470c5f9b85bbe147878426fec7519f8, type: 2}
   - {fileID: 11400000, guid: 8608eb28aabc6554e8805a31023e6a4a, type: 2}
-  allDirectories: []
-  neededDirectories: []
-  invalidDirectories: []
-  missingDirectories: []
+  - {fileID: 11400000, guid: e687a70b615dcc746a0aa42a40c7cd42, type: 2}
+  ObjectName: Guitar
+  allDirectories:
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Materials
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Models
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Obsluted
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Samples
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Scripts
+  neededDirectories:
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Models
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Materials
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Textures
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Scripts
+  invalidDirectories:
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Obsluted
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Samples
+  missingDirectories:
+  - C:/Projects/JakeTCRAGPrototype/JakeTCRAGPrototype/Assets/Guitar/Textures
