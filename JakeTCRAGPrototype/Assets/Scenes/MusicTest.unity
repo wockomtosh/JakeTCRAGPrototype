@@ -914,7 +914,7 @@ MonoBehaviour:
     slider: {fileID: 1075004007}
     powerUp: 2
     increaseAmount: 0.2
-  rhythmCooldownFactor: 20
+  rhythmCooldownFactor: 15
   leadCooldownTime: 10
   bpm: 120
   timeSignature: 4

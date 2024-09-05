@@ -9,7 +9,6 @@ public struct AdjustableTrack
 {
     public AudioSource rhythm;
     public AudioSource lead;
-    [HideInInspector] public float timer; //used to track how long the lead has been playing
     public Slider slider;
     public PowerUp powerUp;
     public float increaseAmount;
@@ -29,8 +28,6 @@ public class MusicManager : MonoBehaviour
     [Header("Track Cooldown Props")]
     [Tooltip("A factor by which delta time is divided in order to determine how quickly the rhythm drops in volume. The larger the number the slower the cooldown")]
     [SerializeField] float rhythmCooldownFactor = 20f;
-    [Tooltip("The amount of time it takes for the lead track to end")]
-    [SerializeField] float leadCooldownTime = 5f;
 
     [Header("Music props")]
     [SerializeField]
@@ -57,14 +54,12 @@ public class MusicManager : MonoBehaviour
         guitar.lead.Play();
         guitar.lead.volume = .5f;
         guitar.lead.mute = true;
-        guitar.timer = leadCooldownTime;
 
         keyboard.rhythm.Play();
         keyboard.rhythm.volume = .5f;
         keyboard.lead.Play();
         keyboard.lead.volume = .5f;
         keyboard.lead.mute = true;
-        keyboard.timer = leadCooldownTime;
 
         foreach( EnemyController enemy in GameObject.FindObjectsOfType<EnemyController>())
         {
