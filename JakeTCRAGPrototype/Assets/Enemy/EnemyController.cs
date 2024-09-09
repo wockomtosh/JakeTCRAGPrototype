@@ -108,11 +108,11 @@ public class EnemyController : MonoBehaviour
         curBeat = beat1;
 
         beatAction += IncrementBeat;
-        BeatManager.GetInstance().RegisterBeatFunction(beatAction, beatSubdivision);
     }
 
     public void Play()
     {
+        BeatManager.GetInstance().RegisterBeatFunction(beatAction, beatSubdivision);
         ResetBeat();
         started = true;
     }
