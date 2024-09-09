@@ -9,15 +9,18 @@ public class BeatPulse : MonoBehaviour
     [SerializeField]
     private float beatSubdivision = 1;
     [SerializeField]
-    private float beatScale = 1.3f;
+    private float beatScaleAmount = 1.3f;
+    private Vector3 beatScale;
     private Vector3 baseScale;
     [SerializeField]
     private float scaleDownTime = .1f;
+    private float elapsedTime = 0;
 
     void Start()
     {
         beatAction += StartBeatPulse;
         baseScale = transform.localScale;
+        beatScale = baseScale * beatScaleAmount;
     }
 
     public void Play()
@@ -29,7 +32,9 @@ public class BeatPulse : MonoBehaviour
     {
         if (transform.localScale.magnitude > baseScale.magnitude)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, baseScale, scaleDownTime);
+            float timeRatio = elapsedTime / scaleDownTime;
+            transform.localScale = Vector3.Lerp(beatScale, baseScale, timeRatio);
+            elapsedTime += Time.deltaTime;
         }
         else
         {
@@ -40,6 +45,7 @@ public class BeatPulse : MonoBehaviour
 
     void StartBeatPulse()
     {
-        transform.localScale *= beatScale;
+        transform.localScale = beatScale;
+        elapsedTime = 0;
     }
 }
