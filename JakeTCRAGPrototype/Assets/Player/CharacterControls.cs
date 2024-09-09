@@ -88,7 +88,7 @@ public class CharacterControls : MonoBehaviour
     {
         attacking = guitarController.GetIsSwinging;
         HandleMovement();
-        HandleAttack();
+        HandleAttackCollision();
     }
 
     void HandleMovement()
@@ -116,7 +116,7 @@ public class CharacterControls : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    void HandleAttack()
+    void HandleAttackCollision()
     {
         if (!attacking)
         {
@@ -144,12 +144,19 @@ public class CharacterControls : MonoBehaviour
                     float endAngle = Vector3.Angle(endVector, enemyVector);
                     if (beginAngle <= attackAngle && endAngle <= attackAngle)
                     {
-                        //Apply damage and knockback
-                        enemy.GetComponent<Health>().TakeDamage((int)curStrength);
+                        if (enemy.GetComponent<EnemyController>() != null)
+                        {
+                            //Apply damage and knockback
+                            enemy.GetComponent<Health>().TakeDamage((int)curStrength);
 
-                        //Apply knockback
-                        Vector3 knockbackDir = new Vector3(enemyVector.x, 0, enemyVector.z);
-                        enemy.GetComponent<EnemyController>().ApplyKnockback(knockbackDir.normalized, 10);
+                            //Apply knockback
+                            Vector3 knockbackDir = new Vector3(enemyVector.x, 0, enemyVector.z);
+                            enemy.GetComponent<EnemyController>().ApplyKnockback(knockbackDir.normalized, 10);
+                        }
+                        else if (enemy.GetComponent<EnemyProjectile>() != null)
+                        {
+                            enemy.transform.forward = transform.forward;
+                        }
                     }
                 }
             }
