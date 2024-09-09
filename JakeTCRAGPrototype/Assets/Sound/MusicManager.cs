@@ -70,6 +70,10 @@ public class MusicManager : MonoBehaviour
         {
             enemy.Play();
         }
+        foreach (BeatPulse pulse in GameObject.FindObjectsOfType<BeatPulse>())
+        {
+            pulse.Play();
+        }
 
     }
 

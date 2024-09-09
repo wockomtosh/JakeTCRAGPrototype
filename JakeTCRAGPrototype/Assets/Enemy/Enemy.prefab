@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3773962549326460444}
   - component: {fileID: 2425293827824722564}
   - component: {fileID: 2407035909710999424}
+  - component: {fileID: 8648432360493028803}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -104,7 +105,7 @@ MonoBehaviour:
   attackCollider: {fileID: 262617391718141516}
   shield: {fileID: 6378965943689198743}
   projectilePrefab: {fileID: 6228555549503099696, guid: ee292a619855b594c9d4eda7cc4f5c38, type: 3}
-  bpm: 76
+  beatSubdivision: 1
   beatMoveSpeed: 15
   beatMoveDuration: 0.1
   closeRadius: 10
@@ -182,6 +183,22 @@ MonoBehaviour:
   defaultMaterial: {fileID: -876546973899608171, guid: b7399495a2ac93b45beb2deedd0f9d48, type: 3}
   damageMaterial: {fileID: -876546973899608171, guid: 8f66838cd5632904bbc415e304bbdfb8, type: 3}
   canTakeDamage: 1
+  canDie: 1
+--- !u!114 &8648432360493028803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038588573155235805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a6db088daaa7a468faba75e5b275a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatSubdivision: 1
+  beatScale: 1.3
+  scaleDownTime: 0.1
 --- !u!1 &4792544365402953691
 GameObject:
   m_ObjectHideFlags: 0
