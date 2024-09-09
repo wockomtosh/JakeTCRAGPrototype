@@ -21,10 +21,15 @@ public class BeatPulse : MonoBehaviour
         baseScale = transform.localScale;
     }
 
+    public void Play()
+    {
+        BeatManager.GetInstance().RegisterBeatFunction(beatAction, beatSubdivision);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (transform.localScale.magnitude > 1)
+        if (transform.localScale.magnitude > baseScale.magnitude)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, baseScale, scaleDownTime);
         }
@@ -33,11 +38,6 @@ public class BeatPulse : MonoBehaviour
             transform.localScale = Vector3.one;
         }
         
-    }
-
-    public void Play()
-    {
-        BeatManager.GetInstance().RegisterBeatFunction(beatAction, beatSubdivision);
     }
 
     void StartBeatPulse()
