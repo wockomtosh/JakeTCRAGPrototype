@@ -153,7 +153,6 @@ public class CharacterControls : MonoBehaviour
                     }
                 }
             }
-            
         }
     }
 

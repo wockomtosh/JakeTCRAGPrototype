@@ -204,7 +204,6 @@ public class EnemyController : MonoBehaviour
                 else
                 {
                     int direction = Random.Range(0, 2);
-                    Debug.Log(direction);
                     if (direction == 0)
                     {
                         enemyVelocity += -transform.right * beatMoveSpeed;
