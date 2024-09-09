@@ -14,7 +14,6 @@ public class BeatPulse : MonoBehaviour
     [SerializeField]
     private float scaleDownTime = .1f;
 
-    // Start is called before the first frame update
     void Start()
     {
         beatAction += StartBeatPulse;
@@ -26,7 +25,6 @@ public class BeatPulse : MonoBehaviour
         BeatManager.GetInstance().RegisterBeatFunction(beatAction, beatSubdivision);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (transform.localScale.magnitude > baseScale.magnitude)
@@ -35,7 +33,7 @@ public class BeatPulse : MonoBehaviour
         }
         else
         {
-            transform.localScale = Vector3.one;
+            transform.localScale = baseScale;
         }
         
     }
