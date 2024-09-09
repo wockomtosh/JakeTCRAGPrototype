@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -13,7 +14,8 @@ public class BeatManager : MonoBehaviour
     [SerializeField]
     private AudioSource beatTrack;
 
-    private Interval[] intervals;
+    [SerializeField]
+    private List<Interval> intervals;
 
 
     void Start()
@@ -23,12 +25,27 @@ public class BeatManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (!beatTrack.isPlaying)
+        {
+            return;
+        }
+
+        foreach (Interval interval in intervals)
+        {
+            float sampledTime = (beatTrack.timeSamples / (beatTrack.clip.frequency * interval.GetBeatLength(bpm)));
+            interval.CheckForNewInterval(sampledTime);
+        }
     }
 
-    public void RegisterBeatFunction(UnityEvent trigger, float subdivisions = 1)
+    public void RegisterBeatFunction(UnityAction triggerFunction, float subdivisions = 1)
     {
         Interval newInterval = new Interval();
+        newInterval.subdivisions = subdivisions;
+        UnityEvent trigger = new UnityEvent();
+        trigger.AddListener(triggerFunction);
+        newInterval.trigger = trigger;
+
+        intervals.Add(newInterval);
     }
 
     public static BeatManager GetInstance()
@@ -37,10 +54,12 @@ public class BeatManager : MonoBehaviour
     }
 }
 
+[Serializable]
 public class Interval
 {
-    private float subdivisions;
-    private UnityEvent trigger;
+    public float subdivisions;
+    [SerializeField]
+    public UnityEvent trigger;
     private int lastInterval;
 
     public float GetBeatLength(float bpm)

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.Events;
 
 [Serializable]
 enum EnemyMovementAction
@@ -47,9 +48,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Rhythm Props")]
     [SerializeField]
-    private float bpm = 76;
-    private float beatLength;
-    private float beatTimer = 0;
+    private float beatSubdivision = 1;
     private int timeSignature = 4;
     private int curBeatNum = 0;
 
@@ -98,15 +97,18 @@ public class EnemyController : MonoBehaviour
     private bool hasKnockback = false;
 
     private bool started = false;
+    private UnityAction beatAction;
 
     void Start()
     {
-        beatLength = 60 / bpm;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.color = Color.white;
         controller = GetComponent<CharacterController>();
 
         curBeat = beat1;
+
+        beatAction += IncrementBeat;
+        BeatManager.GetInstance().RegisterBeatFunction(beatAction, beatSubdivision);
     }
 
     public void Play()
@@ -119,36 +121,7 @@ public class EnemyController : MonoBehaviour
     {
         if (started)
         {
-            UpdateBeats();
             UpdateMovement();
-        }
-    }
-
-    void UpdateBeats()
-    {
-        beatTimer += Time.deltaTime;
-        if (beatTimer > beatLength)
-        {
-            //We'll need to be very precise with beat timing or we'll need a way to sync up with the music every measure
-            beatTimer -= beatLength;
-
-            IncrementBeat();
-
-            switch (curBeatNum)
-            {
-                case 0:
-                    ApplyEnemyBeat(beat1);
-                    break;
-                case 1:
-                    ApplyEnemyBeat(beat2);
-                    break;
-                case 2:
-                    ApplyEnemyBeat(beat3);
-                    break;
-                case 3:
-                    ApplyEnemyBeat(beat4);
-                    break;
-            }
         }
     }
 
@@ -158,6 +131,22 @@ public class EnemyController : MonoBehaviour
         if (curBeatNum >= timeSignature)
         {
             curBeatNum = 0;
+        }
+
+        switch (curBeatNum)
+        {
+            case 0:
+                ApplyEnemyBeat(beat1);
+                break;
+            case 1:
+                ApplyEnemyBeat(beat2);
+                break;
+            case 2:
+                ApplyEnemyBeat(beat3);
+                break;
+            case 3:
+                ApplyEnemyBeat(beat4);
+                break;
         }
     }
 
@@ -287,7 +276,5 @@ public class EnemyController : MonoBehaviour
     {
         curBeat = beat1;
         curBeatNum = 0;
-        beatTimer = 0;
-        beatLength = 60 / bpm;
     }
 }

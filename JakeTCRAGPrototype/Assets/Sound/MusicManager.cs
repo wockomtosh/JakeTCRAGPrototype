@@ -45,7 +45,7 @@ public class MusicManager : MonoBehaviour
         //Set music props
         beatLength = 60 / bpm;
 
-        //StartMusic();
+        StartMusic();
     }
 
     public void StartMusic()
