@@ -45,6 +45,11 @@ public class MusicManager : MonoBehaviour
         //Set music props
         beatLength = 60 / bpm;
 
+        //StartMusic();
+    }
+
+    public void StartMusic()
+    {
         //Set tracks
         drums.Play();
         drums.volume = .5f;
@@ -61,10 +66,11 @@ public class MusicManager : MonoBehaviour
         keyboard.lead.volume = .5f;
         keyboard.lead.mute = true;
 
-        foreach( EnemyController enemy in GameObject.FindObjectsOfType<EnemyController>())
+        foreach (EnemyController enemy in GameObject.FindObjectsOfType<EnemyController>())
         {
-            enemy.ResetBeat();
+            enemy.Play();
         }
+
     }
 
     //TODO: Have some sort of fade-in/out for the tracks rather than just mute/unmute?

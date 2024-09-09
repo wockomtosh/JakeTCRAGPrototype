@@ -22,6 +22,7 @@ public class CharacterControls : MonoBehaviour
     InputAction moveAction;
     InputAction attack1Action;
     InputAction dodgeAction;
+    InputAction startAction;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -80,8 +81,15 @@ public class CharacterControls : MonoBehaviour
         attack1Action.Enable();
         dodgeAction = GetComponent<PlayerInput>().actions.FindAction("Dodge");
         dodgeAction.Enable();
+        startAction = GetComponent<PlayerInput>().actions.FindAction("Start");
+        startAction.Enable();
 
         GetComponent<Health>().canTakeDamage = true;
+    }
+
+    void OnStart()
+    {
+        MusicManager.GetInstance().StartMusic();
     }
 
     void Update()

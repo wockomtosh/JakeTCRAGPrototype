@@ -97,6 +97,7 @@ public class EnemyController : MonoBehaviour
     private float knockbackDuration = .2f;
     private bool hasKnockback = false;
 
+    private bool started = false;
 
     void Start()
     {
@@ -108,10 +109,19 @@ public class EnemyController : MonoBehaviour
         curBeat = beat1;
     }
 
+    public void Play()
+    {
+        ResetBeat();
+        started = true;
+    }
+
     void Update()
     {
-        UpdateBeats();
-        UpdateMovement();
+        if (started)
+        {
+            UpdateBeats();
+            UpdateMovement();
+        }
     }
 
     void UpdateBeats()
