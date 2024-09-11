@@ -77,7 +77,7 @@ public class EnemyController : MonoBehaviour
 
     private EnemyBeat curBeat;
 
-    private Vector3 attackPos = new Vector3(0, .9f, 0);
+    private Vector3 attackPos = new Vector3(0, .4f, 0);
     private Vector3 restPos = Vector3.zero;
 
     [Header("General Movement Props")]
