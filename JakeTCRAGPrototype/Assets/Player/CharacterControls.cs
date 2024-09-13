@@ -19,6 +19,8 @@ public class CharacterControls : MonoBehaviour
 
     CharacterController controller;
     Guitar_Controller guitarController;
+    Keyboard_Controller keyboardController;
+    SoundWaveController soundWaveController;
     InputAction moveAction;
     InputAction attack1Action;
     InputAction dodgeAction;
@@ -74,6 +76,8 @@ public class CharacterControls : MonoBehaviour
 
         controller = GetComponent<CharacterController>();
         guitarController = GetComponentInChildren<Guitar_Controller>();
+        keyboardController = GetComponentInChildren<Keyboard_Controller>();
+        soundWaveController = GetComponentInChildren<SoundWaveController>();
 
         moveAction = GetComponent<PlayerInput>().actions.FindAction("Move");
         moveAction.Enable();
@@ -94,7 +98,7 @@ public class CharacterControls : MonoBehaviour
 
     void Update()
     {
-        attacking = guitarController.GetIsSwinging;
+        attacking = guitarController.GetIsSwinging || soundWaveController.IsSendingWave;
         HandleMovement();
         HandleAttackCollision();
     }
@@ -131,42 +135,63 @@ public class CharacterControls : MonoBehaviour
             return;
         }
 
-        //Filter nearby enemies
-        Collider[] enemies = Physics.OverlapSphere(transform.position, 5, LayerMask.GetMask("Enemy"));
-
-        foreach (Collider enemy in enemies)
+        if (guitarController.GetIsSwinging)
         {
-            Vector3 enemyVector = enemy.transform.position - transform.position;
-            float distToEnemy = enemyVector.magnitude;
-            guitarController.GetSwingRadious(out float attackRadius);
+            //Filter nearby enemies
+            Collider[] enemies = Physics.OverlapSphere(transform.position, 5, LayerMask.GetMask("Enemy"));
 
-            if (distToEnemy < attackRadius)
+            foreach (Collider enemy in enemies)
             {
-                if(guitarController.GetSwingTrailEdges(out SwingLine beginLine, out SwingLine endLine))
-                {
-                    //using player position as start for now
-                    Vector3 beginVector = beginLine.P2 - transform.position;
-                    Vector3 endVector = endLine.P2 - transform.position;
-                    float attackAngle = Vector3.Angle(beginVector, endVector);
-                    float beginAngle = Vector3.Angle(beginVector, enemyVector);
-                    float endAngle = Vector3.Angle(endVector, enemyVector);
-                    if (beginAngle <= attackAngle && endAngle <= attackAngle)
-                    {
-                        if (enemy.GetComponent<EnemyController>() != null)
-                        {
-                            //Apply damage and knockback
-                            enemy.GetComponent<Health>().TakeDamage((int)curStrength);
+                Vector3 enemyVector = enemy.transform.position - transform.position;
+                float distToEnemy = enemyVector.magnitude;
+                guitarController.GetSwingRadious(out float attackRadius);
 
-                            //Apply knockback
-                            Vector3 knockbackDir = new Vector3(enemyVector.x, 0, enemyVector.z);
-                            enemy.GetComponent<EnemyController>().ApplyKnockback(knockbackDir.normalized, 10);
-                        }
-                        else if (enemy.GetComponent<EnemyProjectile>() != null)
+                if (distToEnemy < attackRadius)
+                {
+                    if (guitarController.GetSwingTrailEdges(out SwingLine beginLine, out SwingLine endLine))
+                    {
+                        //using player position as start for now
+                        Vector3 beginVector = beginLine.P2 - transform.position;
+                        Vector3 endVector = endLine.P2 - transform.position;
+                        float attackAngle = Vector3.Angle(beginVector, endVector);
+                        float beginAngle = Vector3.Angle(beginVector, enemyVector);
+                        float endAngle = Vector3.Angle(endVector, enemyVector);
+                        if (beginAngle <= attackAngle && endAngle <= attackAngle)
                         {
-                            enemy.transform.forward = transform.forward;
+                            if (enemy.GetComponent<EnemyController>() != null)
+                            {
+                                //Apply damage and knockback
+                                enemy.GetComponent<Health>().TakeDamage((int)curStrength);
+
+                                //Apply knockback
+                                Vector3 knockbackDir = new Vector3(enemyVector.x, 0, enemyVector.z);
+                                enemy.GetComponent<EnemyController>().ApplyKnockback(knockbackDir.normalized, 10);
+                            }
+                            else if (enemy.GetComponent<EnemyProjectile>() != null)
+                            {
+                                enemy.transform.forward = transform.forward;
+                            }
                         }
                     }
                 }
+            }
+        }
+        
+        if (soundWaveController.IsSendingWave)
+        {
+            Vector2 begin;
+            Vector2 end;
+            if (keyboardController.GetCurrentAttackBoundingBox(out begin, out end))
+            {
+                Debug.Log(begin);
+                Debug.Log(end);
+                //Filter nearby enemies
+                Collider[] enemies = Physics.OverlapSphere(transform.position, 10, LayerMask.GetMask("Enemy"));
+
+                //foreach (Collider enemy in enemies)
+                //{
+                //    enemy.transform.position.x
+                //}
             }
         }
     }
@@ -202,7 +227,7 @@ public class CharacterControls : MonoBehaviour
 
     void OnAttack2(InputValue value)
     {
-        if (guitarController.TriggerSwinging())
+        if (keyboardController.TriggerAttack())
         {
             MusicManager.GetInstance().IncreaseKeyboard();
         }
