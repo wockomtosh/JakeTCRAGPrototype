@@ -291,7 +291,8 @@ public class CharacterControls : MonoBehaviour
             case PowerUp.Strength:
                 setDefaultMaterial();
                 curStrength = playerStrength;
-                GameObject.Find("Point2").transform.localPosition = new Vector3(0, baseGuitarLength, 0);
+                if (GameObject.Find("Point2"))
+                    GameObject.Find("Point2").transform.localPosition = new Vector3(0, baseGuitarLength, 0);
                 break;
         }
     }

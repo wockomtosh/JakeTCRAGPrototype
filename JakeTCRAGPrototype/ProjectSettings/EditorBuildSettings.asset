@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MusicTest.unity
+    guid: c1b8428c2ad616445b9feec4d84975b1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 860bca323b0bc9748b1d8941cd04274e, type: 2}
