@@ -15,7 +15,7 @@ public class SoundWaveController : MonoBehaviour
     [Header("Debug")]
     [SerializeField] MeshRenderer MeshR;
     [SerializeField] VisualEffect PS_MusicNodes;
-    [SerializeField] bool IsSendingWave = false;
+    [SerializeField] public bool IsSendingWave = false;
     [SerializeField] float ForwardDis = 0;
     [SerializeField] float OriginalFloatingSpeed;
     [SerializeField] float OriginalWaveScale;
