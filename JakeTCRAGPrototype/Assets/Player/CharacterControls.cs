@@ -19,6 +19,10 @@ public class CharacterControls : MonoBehaviour
 
     CharacterController controller;
     Guitar_Controller guitarController;
+    Keyboard_Controller keyboardController;
+    SoundWaveController soundWaveController;
+    [SerializeField]
+    Collider keyboardAttackCollider;
     InputAction moveAction;
     InputAction attack1Action;
     InputAction dodgeAction;
@@ -74,6 +78,9 @@ public class CharacterControls : MonoBehaviour
 
         controller = GetComponent<CharacterController>();
         guitarController = GetComponentInChildren<Guitar_Controller>();
+        keyboardController = GetComponentInChildren<Keyboard_Controller>();
+        soundWaveController = GetComponentInChildren<SoundWaveController>();
+        keyboardController.gameObject.SetActive(false);
 
         moveAction = GetComponent<PlayerInput>().actions.FindAction("Move");
         moveAction.Enable();
@@ -94,7 +101,7 @@ public class CharacterControls : MonoBehaviour
 
     void Update()
     {
-        attacking = guitarController.GetIsSwinging;
+        attacking = guitarController.GetIsSwinging || soundWaveController.IsSendingWave;
         HandleMovement();
         HandleAttackCollision();
     }
@@ -126,48 +133,67 @@ public class CharacterControls : MonoBehaviour
 
     void HandleAttackCollision()
     {
+        if (soundWaveController.IsSendingWave) //TODO: Don't use a collider for this later, this was a bandaid fix
+        {
+            keyboardAttackCollider.enabled = true;
+        }
+        else
+        {
+            keyboardAttackCollider.enabled = false;
+        }
+
         if (!attacking)
         {
             return;
         }
 
-        //Filter nearby enemies
-        Collider[] enemies = Physics.OverlapSphere(transform.position, 5, LayerMask.GetMask("Enemy"));
-
-        foreach (Collider enemy in enemies)
+        if (guitarController.GetIsSwinging)
         {
-            Vector3 enemyVector = enemy.transform.position - transform.position;
-            float distToEnemy = enemyVector.magnitude;
-            guitarController.GetSwingRadious(out float attackRadius);
+            //Filter nearby enemies
+            Collider[] enemies = Physics.OverlapSphere(transform.position, 5, LayerMask.GetMask("Enemy"));
 
-            if (distToEnemy < attackRadius)
+            foreach (Collider enemy in enemies)
             {
-                if(guitarController.GetSwingTrailEdges(out SwingLine beginLine, out SwingLine endLine))
-                {
-                    //using player position as start for now
-                    Vector3 beginVector = beginLine.P2 - transform.position;
-                    Vector3 endVector = endLine.P2 - transform.position;
-                    float attackAngle = Vector3.Angle(beginVector, endVector);
-                    float beginAngle = Vector3.Angle(beginVector, enemyVector);
-                    float endAngle = Vector3.Angle(endVector, enemyVector);
-                    if (beginAngle <= attackAngle && endAngle <= attackAngle)
-                    {
-                        if (enemy.GetComponent<EnemyController>() != null)
-                        {
-                            //Apply damage and knockback
-                            enemy.GetComponent<Health>().TakeDamage((int)curStrength);
+                Vector3 enemyVector = enemy.transform.position - transform.position;
+                float distToEnemy = enemyVector.magnitude;
+                guitarController.GetSwingRadious(out float attackRadius);
 
-                            //Apply knockback
-                            Vector3 knockbackDir = new Vector3(enemyVector.x, 0, enemyVector.z);
-                            enemy.GetComponent<EnemyController>().ApplyKnockback(knockbackDir.normalized, 10);
-                        }
-                        else if (enemy.GetComponent<EnemyProjectile>() != null)
+                if (distToEnemy < attackRadius)
+                {
+                    if (guitarController.GetSwingTrailEdges(out SwingLine beginLine, out SwingLine endLine))
+                    {
+                        //using player position as start for now
+                        Vector3 beginVector = beginLine.P2 - transform.position;
+                        Vector3 endVector = endLine.P2 - transform.position;
+                        float attackAngle = Vector3.Angle(beginVector, endVector);
+                        float beginAngle = Vector3.Angle(beginVector, enemyVector);
+                        float endAngle = Vector3.Angle(endVector, enemyVector);
+                        if (beginAngle <= attackAngle && endAngle <= attackAngle)
                         {
-                            enemy.transform.forward = transform.forward;
+                            ApplyDamageToEnemy(enemy);
                         }
                     }
                 }
             }
+        }
+    }
+
+    public void ApplyDamageToEnemy(Collider enemy)
+    {
+        if (enemy.GetComponent<EnemyController>() != null)
+        {
+            Vector3 enemyVector = enemy.transform.position - transform.position; //TODO: Refine this, it's being calculated twice in some places
+
+            //Apply damage and knockback
+            enemy.GetComponent<Health>().TakeDamage((int)curStrength);
+
+            //Apply knockback
+            Vector3 knockbackDir = new Vector3(enemyVector.x, 0, enemyVector.z);
+            enemy.GetComponent<EnemyController>().ApplyKnockback(knockbackDir.normalized, 10);
+        }
+        else if (enemy.GetComponent<EnemyProjectile>() != null)
+        {
+            enemy.transform.forward = transform.forward;
         }
     }
 
@@ -194,6 +220,9 @@ public class CharacterControls : MonoBehaviour
     
     void OnAttack1(InputValue value)
     {
+        guitarController.gameObject.SetActive(true);
+        keyboardController.gameObject.SetActive(false);
+
         if (guitarController.TriggerSwinging())
         {
             MusicManager.GetInstance().IncreaseGuitar();
@@ -202,7 +231,10 @@ public class CharacterControls : MonoBehaviour
 
     void OnAttack2(InputValue value)
     {
-        if (guitarController.TriggerSwinging())
+        guitarController.gameObject.SetActive(false);
+        keyboardController.gameObject.SetActive(true);
+
+        if (keyboardController.TriggerAttack())
         {
             MusicManager.GetInstance().IncreaseKeyboard();
         }
@@ -259,7 +291,8 @@ public class CharacterControls : MonoBehaviour
             case PowerUp.Strength:
                 setDefaultMaterial();
                 curStrength = playerStrength;
-                GameObject.Find("Point2").transform.localPosition = new Vector3(0, baseGuitarLength, 0);
+                if (GameObject.Find("Point2"))
+                    GameObject.Find("Point2").transform.localPosition = new Vector3(0, baseGuitarLength, 0);
                 break;
         }
     }
